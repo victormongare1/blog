@@ -43,6 +43,28 @@ class Blog(db.Model):
   comments = db.relationship('Comment', backref = 'blog', lazy = 'dynamic')
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+  def save_blog(self):
+    '''
+    Method that saves a blog to the database
+    '''
+    db.session.add(self)
+    db.session.commit()
+
+  @classmethod
+  def get_blog(cls,id):
+    '''
+    method that retrieves one particular blog using the id
+    '''
+    pitch=Blog.query.filter_by(id=id).first()
+    return blog
+
+  def get_comments(self):
+    '''
+    Method that retrieves a pitch's comments.
+    '''
+    blog = Blog.query.filter_by(id = self.id).first()
+    comments = Comment.query.filter_by(blog_id = blog.id).all()
+    return comments    
 class Comment(db.Model):
   '''
   comment class to define comment objects
