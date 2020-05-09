@@ -18,3 +18,10 @@ class User(UserMixin,db.Model):
   email=db.Column(db.String(255),unique=True,index=True)
   pass_secure=db.Column(db.String(255))
   password_hash=db.Column(db.String(255))
+
+class Comment(db.Model):
+  '''
+  comment class to define comment objects
+  ''' 
+  __tablename__='comments'
+  id = db.Column(db.Integer,primary_key=True)  
