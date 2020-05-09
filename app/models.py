@@ -25,3 +25,9 @@ class Comment(db.Model):
   ''' 
   __tablename__='comments'
   id = db.Column(db.Integer,primary_key=True)  
+
+class Quote():
+  '''
+  Quote class to define quote objects
+  '''
+  

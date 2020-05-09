@@ -4,6 +4,7 @@ class Config:
   General configuration parent class
   '''
   SECRET_KEY = os.environ.get('SECRET_KEY')
+  QUOTE_URL='http://quotes.stormconsultancy.co.uk/random.json'
   SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://victor:2001@localhost/blog'
   UPLOADED_PHOTOS_DEST='app/static/photos'
   #  email configurations
