@@ -27,3 +27,18 @@ def get_quote():
 
 
   return quote_results
+def process_results(quote_list):
+  '''
+  function that takes in source result and transforms it to a list of objects
+  '''
+  quote_results = []
+  for quote_item in quote_list:
+    author=quote_item.get('id')
+    quote= quote_item.get('name')
+
+    if quote:
+      quote_object = Quote(author,quote)
+      quote_results.append(quote_object)
+
+  return quote_results
+  
