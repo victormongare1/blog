@@ -5,18 +5,19 @@ from .forms import CommentForm,NewBlog
 from .. import db,photos
 from flask_login import login_required,current_user
 from ..requests import get_quote 
+from ..email import subscribe_message
 
 @main.route('/')
 def index():
   '''
   view root that returns the index page with the various blogs
   '''
-  title = 'Blogs'
+  title = 'Blog Master'
   quote=get_quote()
   blogs=Blog.query.all()
   return render_template('index.html',title=title,quote=quote,blogs=blogs)
 
-@main.route('/pitch/new', methods = ['GET','POST'])
+@main.route('/blog/new', methods = ['GET','POST'])
 @login_required
 def add_blog():
   '''
@@ -25,13 +26,14 @@ def add_blog():
   form = NewBlog()
   if form.validate_on_submit():
     title = form.title.data
-    blog = form.blog.data
+    content = form.content.data
 
     # Updated blog instance
-    new_pitch = Blog(title=title,content=content, user = current_user)
+    new_blog = Blog(title=title,content=content, user = current_user)
+    
 
     # Save pitch method
-    new_pitch.save_blog()
+    new_blog.save_blog()
     return redirect(url_for('.index'))
 
   title = 'New Blog'
@@ -42,6 +44,7 @@ def blog(id):
   '''
   view function for showing one particular blog and its comments
   '''
+  comment=Comment.get_comment(id)
   blog = Blog.get_blog(id)
   comment_form = CommentForm()
   if comment_form.validate_on_submit():
@@ -52,4 +55,4 @@ def blog(id):
     new_comment.save_comment()
   comments = Blog.get_comments(blog)
 
-  return render_template("blog.html", , comment_form = comment_form, comments = comments)  
+  return render_template("blog.html", comment_form = comment_form, comments = comments,blog=blog)  

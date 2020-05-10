@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<div class="navbar-inverse navbar-brand" role="navigation">
+<div class="navbar navbar-inverse" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -13,14 +13,13 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
          <li><a href="/">HOME</a></li>
-         
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if current_user.is_authenticated %}
-        <li><a href="{{url_for('main.profile',uname=current_user.username)}}"><button class="btn-xs btn-warning">WRITER PROFILE</button></a></li>
         <li><a href="{{url_for('auth.logout')}}"><button class="btn-xs btn-warning">WRITER SIGN OUT</button></a></li>
         {% else %}
         <li><a href="{{url_for('auth.login')}}"><button class="btn-xs btn-danger">WRITER SIGN IN</button></a></li>
+        <li><a href="{{url_for('auth.subscribe')}}"><button class="btn-xs btn-danger">SUBSCRIBE</button></a></li>
         {% endif %}
       </ul>
     </div> 

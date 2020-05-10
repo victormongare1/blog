@@ -1,7 +1,7 @@
 from . import auth
 from flask import render_template,redirect,url_for,flash,request
 from flask_login import login_user,logout_user,login_required
-from ..models import User
+from ..models import User,Subscriber
 from .forms import LoginForm,RegistrationForm,SubscribeForm
 from ..email import mail_message
 from ..import db
@@ -49,11 +49,11 @@ def subscribe():
   '''
   title="SUBSCRIBE"
   form = SubscribeForm()
-    if form.validate_on_submit():
-      subscriber= Subscription(username=form.username.data,email=form.email.data)
-      db.session.add(subscriber)
-      db.session.commit()
-      return redirect(url_for("main.index"))     
-    return render_template('subscribe.html', title=title,  form=form)
+  if form.validate_on_submit():
+    subscriber= Subscriber(username=form.username.data,email=form.email.data)
+    db.session.add(subscriber)
+    db.session.commit()
+    return redirect(url_for("main.index"))     
+  return render_template('subscribe.html', title=title,  form=form)
 
 

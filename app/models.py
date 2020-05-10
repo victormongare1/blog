@@ -18,7 +18,8 @@ class User(UserMixin,db.Model):
   email=db.Column(db.String(255),unique=True,index=True)
   pass_secure=db.Column(db.String(255))
   password_hash=db.Column(db.String(255))
-  
+  blogs=db.relationship('Blog',backref='user',lazy="dynamic")
+  comments=db.relationship('Comment',backref='user',lazy='dynamic')
   @property
   def password(self):
     raise AttributeError('You cannot read the password attribute')
@@ -55,7 +56,7 @@ class Blog(db.Model):
     '''
     method that retrieves one particular blog using the id
     '''
-    pitch=Blog.query.filter_by(id=id).first()
+    blog=Blog.query.filter_by(id=id).first()
     return blog
 
   def get_comments(self):
@@ -64,7 +65,8 @@ class Blog(db.Model):
     '''
     blog = Blog.query.filter_by(id = self.id).first()
     comments = Comment.query.filter_by(blog_id = blog.id).all()
-    return comments    
+    return comments  
+  
 class Comment(db.Model):
   '''
   comment class to define comment objects
@@ -72,9 +74,21 @@ class Comment(db.Model):
   __tablename__='comments'
   
   id = db.Column(db.Integer,primary_key=True)  
-  content==db.Column(db.String)
+  content=db.Column(db.String)
   blog_id=db.Column(db.Integer, db.ForeignKey('blogs.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+  
+  def save_comment(self):
+    db.session.add(self)
+    db.session.commit()
+  
+  @classmethod
+  def get_comment(cls,id):
+    '''
+    method that retrieves one particular blog using the id
+    '''
+    comment=Comment.query.filter_by(id=id).first()
+    return comment
 
 class Subscriber(db.Model):
   '''
