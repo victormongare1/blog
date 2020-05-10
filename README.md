@@ -1,8 +1,8 @@
 # PITCH
-### An application for your one minute pitches, 2020 version
+### An application to post your blogs, 2020 version
 ### By Victor Mongare
 ## Description
-Pitch is web application that enables a user to submit their one minute pitch under the given categories.These pitches are then displayed for everyone to view like or comment.This enables you to see your progress and work with the feedback you are given
+Blog victor is an application that allows a writer to post his/her blogs and allow the blogs to be viewed and commented on
 
 ## Setup/Installation Requirements
 You can gain access to the code for the web landing page by forking from my github repository named news .You can then make an offline copy by:
@@ -12,7 +12,7 @@ To run the program:
 * install a virtual environment where you want to run it and activate the virtual environment
 *  open the directory in terminal and type :($ chmod a+x start.sh) to make it   executable
 * open the progra using ($ ./start.sh )and enjoy
-You can also  find it at https://pitchvictor.herokuapp.com/
+You can also  find it at https://blogvictor.herokuapp.com/
 ## Known Bugs
 There aligninment of the pitches into columns may be irregular and a pitch may be added twice when submitted once.
 The application brings about a server error when registering but when you login with the same credentials you will be logged in
